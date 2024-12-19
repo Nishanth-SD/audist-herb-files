@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Hosting</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #02790c;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      color: #555;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    ul li a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #0e4d00;
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Design and Development of a Large Language Model for Recognizing the Usage of Traditional Herbs</h1>
+  <div class="container">
+    <h2>Available Files for Download</h2>
+    <ul id="file-list">
+      <!-- File links will be dynamically inserted here -->
+    </ul>
+  </div>
+  <footer>
+    Funded By - DST SERB
+  </footer>
+  <script>
+    // Fetch the list of files from the server
+    fetch('/api/files')
+      .then(response => response.json())
+      .then(files => {
+        const fileList = document.getElementById('file-list');
+        files.forEach(file => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<a href="/files/${file}" download>${file}</a>`;
+          fileList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching file list:', error);
+      });
+  </script>
+</body>
+</html>
